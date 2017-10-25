@@ -21,9 +21,8 @@ class RouterDetails(models.Model):
 
 class Tenant(models.Model):
     name = models.CharField(max_length=50)
-    api_key = models.CharField(max_length=100)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
-        return "Name: {} | Api Key: {}".format(self.name, self.api_key)
+        return "Name: {} | Api Key: {}".format(self.name, self.token)
