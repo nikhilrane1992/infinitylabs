@@ -2,7 +2,10 @@ from django.http import JsonResponse
 from django.shortcuts import render_to_response
 from models import *
 from django.core.exceptions import ObjectDoesNotExist
+import json
+from django.contrib.auth import authenticate, login
 import jwt
+from decorators import is_token_valid
 SECRET = "yyJOHrqYiXTNrPS2OHMJuEtyy474duSs"
 
 
@@ -10,18 +13,22 @@ def index(request):
     return render_to_response('index.html')
 
 
+def login_view(request):
+    return render_to_response('login.html')
+
+
 def auth_view(request):
     params = json.loads(request.body)
     username = params['username']
     password = params['password']
-    user = auth.authenticate(username=username, password=password)
+    user = authenticate(username=username, password=password)
 
     if user is not None:
-        auth.login(request, user)
-        request.META['Token'] = jwt.encode(SECRET, algorithm='HS256')
+        login(request, user)
         return JsonResponse({
             "validation": "Login Successful",
-            "status": True
+            "status": True,
+            "token": jwt.encode({'username': username}, SECRET, algorithm='HS256')
         })
     else:
         return JsonResponse({
@@ -30,6 +37,21 @@ def auth_view(request):
         })
 
 
+@is_token_valid
+def save_router_details(request):
+    params = json.loads(request.body)
+    loopback = params.pop('loopback')
+    router, created = RouterDetails.objects.update_or_create(
+        loopback=loopback, defaults=params
+    )
+    return JsonResponse({
+        "validation": "Saved Successfull",
+        "status": True
+    })
+
+
+
+@is_token_valid
 def router_details(request):
     return JsonResponse({
         "data": [{
@@ -40,6 +62,7 @@ def router_details(request):
             "item_weight": router.item_weight,
             "dimensions": router.dimensions,
             "model_number": router.model_number,
+            "router_type": router.router_type,
             "id": router.id
         } for router in RouterDetails.objects.all()],
         "status": True,

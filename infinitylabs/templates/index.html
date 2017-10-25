@@ -95,9 +95,23 @@
     .text-large {
         font-size: 50px;
     }
+
+    .custab {
+        border: 1px solid #ccc;
+        padding: 5px;
+        margin: 5% 0;
+        box-shadow: 3px 3px 2px #ccc;
+        transition: 0.5s;
+    }
+
+    .custab:hover {
+        box-shadow: 3px 3px 0px transparent;
+        transition: 0.5s;
+    }
     </style>
 </head>
 {% verbatim %}
+
 <body ng-cloak ng-app="infinitylabsApp" ng-controller="infinitylabsControllers">
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -106,9 +120,81 @@
         </div>
     </nav>
     <div class="container">
-
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-area">
+                    <form role="form">
+                        <br style="clear:both">
+                        <h3 style="margin-bottom: 25px; text-align: center;">Router Details</h3>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Loopback" ng-model="routerDetailsObj.loopback">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Hostname" ng-model="routerDetailsObj.hostname">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Brand Number" ng-model="routerDetailsObj.brand">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Item Height" ng-model="routerDetailsObj.item_height">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Item W" ng-model="routerDetailsObj.item_weight">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Dimensions" ng-model="routerDetailsObj.dimensions">
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Model Number" ng-model="routerDetailsObj.model_number">
+                        </div>
+                        <div class="form-group">
+                            <select ng-model="routerDetailsObj.router_type" class="form-control">
+                                <option disabled selected value>Router Type</option>
+                                <option value="AG">AG1</option>
+                                <option value="CS">CSS</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary pull-right" ng-click="saveRouterDetails()">Save</button>
+                    </form>
+                </div>
+            </div>
+            <div class="col-md-9 custyle">
+                <br style="clear:both">
+                <h3 style="margin-bottom: 25px; text-align: center;">Entries</h3>
+                <table class="table table-striped custab">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Loopback</th>
+                            <th>Hostname</th>
+                            <th>Brand</th>
+                            <th>Model Number</th>
+                            <th>Router Number</th>
+                            <th>Dimensions</th>
+                            <th>Item Height</th>
+                            <th>Item Weight</th>
+                            <th class="text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tr ng-repeat="router in routerDetails">
+                        <td>{{router.id}}</td>
+                        <td>{{router.loopback}}</td>
+                        <td>{{router.hostname}}</td>
+                        <td>{{router.brand}}</td>
+                        <td>{{router.model_number}}</td>
+                        <td>{{router.router_type}}</td>
+                        <td>{{router.dimensions}}</td>
+                        <td>{{router.item_height}}</td>
+                        <td>{{router.item_weight}}</td>
+                        <td class="text-center">
+                            <a class='btn btn-info btn-xs' href="#" ng-click="updateRouterDetails(router)"><span class="glyphicon glyphicon-edit"></span></a>
+                            <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></a></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
-{% endverbatim %}
+    {% endverbatim %}
     <script src="/static/js/jquery.js"></script>
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/angular.min.js"></script>
