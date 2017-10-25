@@ -6,12 +6,8 @@ import jwt
 SECRET = "yyJOHrqYiXTNrPS2OHMJuEtyy474duSs"
 
 
-def check_athentication(encoded):
-    try:
-        jwt.decode(encoded, SECRET, algorithms=['HS512', 'HS256'])
-        return True
-    except DecodeError:
-        return False
+def index(request):
+    return render_to_response('index.html')
 
 
 def auth_view(request):
@@ -35,11 +31,6 @@ def auth_view(request):
 
 
 def router_details(request):
-    if not check_athentication(request.META['Token']):
-        return JsonResponse({
-            "status": False,
-            "validation": "Invalid Token"
-        })
     return JsonResponse({
         "data": [{
             "loopback": router.loopback,
