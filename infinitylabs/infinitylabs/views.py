@@ -45,14 +45,19 @@ def save_router_details(request):
         loopback=loopback, defaults=params
     )
     return JsonResponse({
-        "validation": "Saved Successfull",
+        "validation": "Saved Successfully",
         "status": True
     })
 
 
-
 @is_token_valid
 def router_details(request):
+    params = json.loads(request.body)
+    kwargs = {}
+    if params.get('loopback'):
+        kwargs['loopback'] = params.get('loopback')
+    if params.get('router_type'):
+        kwargs['router_type'] = params.get('router_type')
     return JsonResponse({
         "data": [{
             "loopback": router.loopback,
@@ -64,6 +69,17 @@ def router_details(request):
             "model_number": router.model_number,
             "router_type": router.router_type,
             "id": router.id
-        } for router in RouterDetails.objects.all()],
+        } for router in RouterDetails.objects.filter(**kwargs)],
         "status": True,
+    })
+
+
+@is_token_valid
+def delete_router_details(request):
+    params = json.loads(request.body)
+    loopback = params.pop('loopback')
+    RouterDetails.objects.get(loopback=loopback).delete()
+    return JsonResponse({
+        "validation": "Deleted Successfully",
+        "status": True
     })

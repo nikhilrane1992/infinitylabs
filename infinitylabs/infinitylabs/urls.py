@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^auth_view/$', auth_view),
     url(r'^router_details/$', router_details),
     url(r'^save/router/details/$', save_router_details),
+    url(r'^delete/router/details/$', delete_router_details),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
