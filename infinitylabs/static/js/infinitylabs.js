@@ -23,8 +23,8 @@ infinitylabsApp.config(['NotificationProvider', '$httpProvider', function(Notifi
 
 infinitylabsApp.controller("infinitylabsControllers", ['$scope', '$log', '$http', '$timeout', 'Notification', function($scope, $log, $http, $timeout, Notification) {
     console.log("infinitylabsControllers loads");
-    $http.defaults.headers.common.Authorization = localStorage.getItem('infinitylabs.token');
     var routerDetails = function() {
+        $http.defaults.headers.common.Authorization = localStorage.getItem('infinitylabs.token');
         $http.post('/router_details/', {}).
         success(function(data, status, headers, config) {
             if (data.status) {
@@ -51,6 +51,7 @@ infinitylabsApp.controller("infinitylabsControllers", ['$scope', '$log', '$http'
         }
     }
     $scope.saveRouterDetails = function() {
+        $http.defaults.headers.common.Authorization = localStorage.getItem('infinitylabs.token');
         $http.post('/save/router/details/', $scope.routerDetailsObj).
         success(function(data, status, headers, config) {
             if (data.status) {
@@ -71,6 +72,7 @@ infinitylabsApp.controller("infinitylabsControllers", ['$scope', '$log', '$http'
     }
 
     $scope.deleteRouterDetails = function(routerObj) {
+        $http.defaults.headers.common.Authorization = localStorage.getItem('infinitylabs.token');
         $http.post('/delete/router/details/', {loopback:routerObj.loopback}).
         success(function(data, status, headers, config) {
             if (data.status) {
