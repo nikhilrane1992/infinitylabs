@@ -136,13 +136,10 @@
               <input type="text" class="form-control" placeholder="Brand Number" ng-model="routerDetailsObj.brand">
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Item Height" ng-model="routerDetailsObj.item_height">
+              <input type="text" class="form-control" placeholder="Sap Id" ng-model="routerDetailsObj.sap_id">
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="Item W" ng-model="routerDetailsObj.item_weight">
-            </div>
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Dimensions" ng-model="routerDetailsObj.dimensions">
+              <input type="text" class="form-control" placeholder="Mac Address" ng-model="routerDetailsObj.mac_address">
             </div>
             <div class="form-group">
               <input type="text" class="form-control" placeholder="Model Number" ng-model="routerDetailsObj.model_number">
@@ -180,12 +177,11 @@
               <th>ID</th>
               <th>IP</th>
               <th>Hostname</th>
+              <th>Sap Id</th>
+              <th>Mac Address</th>
+              <th>Router Type</th>
               <th>Brand</th>
               <th>Model Number</th>
-              <th>Router Type</th>
-              <th>Dimensions</th>
-              <th>Item Height</th>
-              <th>Item Weight</th>
               <th class="text-center">Action</th>
             </tr>
           </thead>
@@ -193,12 +189,11 @@
             <td>{{router.id}}</td>
             <td>{{router.loopback}}</td>
             <td>{{router.hostname}}</td>
+            <td>{{router.sap_id}}</td>
+            <td>{{router.mac_address}}</td>
+            <td>{{router.router_type}}</td>
             <td>{{router.brand}}</td>
             <td>{{router.model_number}}</td>
-            <td>{{router.router_type}}</td>
-            <td>{{router.dimensions}}</td>
-            <td>{{router.item_height}}</td>
-            <td>{{router.item_weight}}</td>
             <td class="text-center">
               <a class='btn btn-info btn-xs' href="#" ng-click="updateRouterDetails(router)"><span class="glyphicon glyphicon-edit"></span></a>
               <a href="#" class="btn btn-danger btn-xs" ng-click="deleteRouterDetails(router)"><span class="glyphicon glyphicon-remove"></span></a></td>

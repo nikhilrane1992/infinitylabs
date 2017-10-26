@@ -63,9 +63,8 @@ def router_details(request):
             "loopback": router.loopback,
             "hostname": router.hostname,
             "brand": router.brand,
-            "item_height": router.item_height,
-            "item_weight": router.item_weight,
-            "dimensions": router.dimensions,
+            "sap_id": router.sap_id,
+            "mac_address": router.mac_address,
             "model_number": router.model_number,
             "router_type": router.router_type,
             "id": router.id

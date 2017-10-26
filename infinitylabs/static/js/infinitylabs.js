@@ -43,9 +43,8 @@ infinitylabsApp.controller("infinitylabsControllers", ['$scope', '$log', '$http'
             loopback: "",
             hostname: "",
             brand: "",
-            item_height: "",
-            item_weight: "",
-            dimensions: "",
+            sap_id: "",
+            mac_address: "",
             model_number: "",
             router_type: "",
             id: null
