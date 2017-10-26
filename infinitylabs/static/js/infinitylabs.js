@@ -89,9 +89,12 @@ infinitylabsApp.controller("infinitylabsControllers", ['$scope', '$log', '$http'
     }
 
 
+    $scope.init =  function() {
+        getDefault();
+        routerDetails();
+    };
 
-    routerDetails();
-    getDefault();
+    $timeout($scope.init,1000);
 }]);
 
 infinitylabsApp.controller("loginControllers", ['$scope', '$log', '$http', '$timeout', 'Notification', function($scope, $log, $http, $timeout, Notification) {
